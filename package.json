@@ -1,6 +1,6 @@
 {
     "name": "obsidian-linkopen",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Copy a LinkOpen link to the current note, heading or block.",
     "main": "main.js",
     "type": "module",

@@ -1,7 +1,7 @@
 {
     "id": "linkopen",
     "name": "LinkOpen",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minAppVersion": "1.1.0",
     "description": "Copy a LinkOpen link to the current note, heading or block. It is an https link, so it stays clickable in Notion, Slack, GitHub and Gmail.",
     "author": "inlife",
