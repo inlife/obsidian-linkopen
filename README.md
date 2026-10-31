@@ -13,14 +13,7 @@ Clicking the https link opens a page on linkopen.app, which passes the `obsidian
 
 ## Install
 
-**From Community plugins** (once the plugin is listed): open **Settings → Community plugins**, select **Browse**, search for "LinkOpen", then install and enable it.
-
-**With BRAT** (until then):
-
-1. Install and enable [BRAT](https://github.com/TfTHacker/obsidian42-brat) from Community plugins.
-2. Run **BRAT: Add a beta plugin for testing** from the command palette.
-3. Enter `inlife/obsidian-linkopen` and select **Add Plugin**.
-4. Enable LinkOpen in **Settings → Community plugins**.
+In Obsidian, open **Settings → Community plugins**, select **Browse**, search for "LinkOpen", then install and enable it. You can also [open the plugin's page in Obsidian](https://linkopen.app/1/obsidian%3A%2F%2Fshow-plugin%3Fid%3Dlinkopen) or see it in the [community directory](https://community.obsidian.md/plugins/linkopen).
 
 **By hand**: download `main.js` and `manifest.json` from the [latest release](https://github.com/inlife/obsidian-linkopen/releases/latest) into `<your vault>/.obsidian/plugins/linkopen/`, reload Obsidian, then enable LinkOpen in **Settings → Community plugins**.
 
@@ -83,35 +76,17 @@ To try a build, copy `main.js` and `manifest.json` into `<vault>/.obsidian/plugi
 - `src/links.js`: building the links, with no Obsidian imports
 - `src/codec.js`: a copy of `utils/codec.js` from the [LinkOpen site](https://github.com/inlife/linkopen). Keep it identical to that file. Its dictionary must never change, because existing links depend on it.
 
-Tests are in `test/links.test.js`. In the LinkOpen site repository they run with the site's `npm test` and decode every link with the site's own codec. On their own, run `npx vitest run`; the test then uses `src/codec.js` in place of the site's file.
+Tests are in `test/links.test.js`. Run them with `npx vitest run`. They decode every link with `src/codec.js` to check it round-trips.
 
 ## Releasing
 
 These steps are for the maintainer.
 
-1. Create the public repository `github.com/inlife/obsidian-linkopen`.
-2. Copy everything in this folder to the root of that repository, including `.gitignore` and `.npmrc`.
-3. Push to the default branch. `main.js` stays out of git; the release workflow builds it.
-4. Make release `1.0.0`, either way:
-   - push a tag with the exact manifest version, no leading `v`: `git tag 1.0.0 && git push origin 1.0.0`
-   - or on GitHub: **Releases > Draft a new release**, type `1.0.0` as a new tag on `main`, and **Publish release**.
-5. `.github/workflows/release.yml` builds the plugin and attaches `main.js` and `manifest.json` to that release. It fails if the tag and `manifest.json` disagree. Check the release page once the workflow is done.
-6. Install it with BRAT (`inlife/obsidian-linkopen`) in a test vault and try the commands on desktop and mobile.
-7. Submit the plugin. Obsidian's current guide ([Submit your plugin](https://docs.obsidian.md/Plugins/Releasing/Submit+your+plugin)) uses the Community directory: sign in at [community.obsidian.md](https://community.obsidian.md) with an Obsidian account, link your GitHub account, open **Plugins**, select **New plugin**, enter `https://github.com/inlife/obsidian-linkopen`, choose the owner, agree to the developer policies and select **Submit**. The directory reads `manifest.json` from the default branch, and the automated review shows anything that needs fixing.
+1. Run `npm version 1.0.1` (or the next version). It updates `manifest.json` and `versions.json`, commits, and creates a tag without a `v`.
+2. Push the commit and the tag: `git push --follow-tags`. If you can't push tags, push the commit, then on GitHub use **Releases > Draft a new release**, type the version as a new tag on `main`, and **Publish release**.
+3. `.github/workflows/release.yml` builds the plugin and attaches `main.js` and `manifest.json` to that release. It fails if the tag and `manifest.json` disagree. Check the release page once the workflow is done.
 
-   Before the directory existed, plugins were submitted with a pull request to [obsidianmd/obsidian-releases](https://github.com/obsidianmd/obsidian-releases) that added an entry to the end of `community-plugins.json`. If that route is needed, this is the entry:
-
-   ```json
-   {
-       "id": "linkopen",
-       "name": "LinkOpen",
-       "author": "inlife",
-       "description": "Copy a LinkOpen link to the current note, heading or block. It is an https link, so it stays clickable in Notion, Slack, GitHub and Gmail.",
-       "repo": "inlife/obsidian-linkopen"
-   }
-   ```
-
-For later releases, run `npm version 1.0.1` (or the next version). It updates `manifest.json` and `versions.json`, commits, and creates a tag without a `v`. Push the commit and the tag; the release workflow does the rest.
+Obsidian offers the update once `manifest.json` on `main` has the new version and the release with that version has its files attached.
 
 ## License
 
