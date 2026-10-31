@@ -1,22 +1,22 @@
-# Builds the plugin and attaches main.js and manifest.json to the GitHub
-# release for a version tag. Works either way you make the release:
-#   - push a tag:  git tag 1.0.0 && git push origin 1.0.0
-#   - or on GitHub: Releases > Draft a new release > tag 1.0.0 > Publish
-# BRAT and Obsidian's community directory read those two files from it.
+# Builds the plugin and publishes the GitHub release for a version tag.
+# Push a tag with the bare version (see CLAUDE.md, Releasing):
+#   npm version patch && git push --atomic origin main <version>
+# If the release doesn't exist yet, this creates it with main.js and
+# manifest.json attached. If it does (for example, made on GitHub's
+# Releases page, which also pushes the tag), it attaches the files to it.
+# Obsidian's community directory and BRAT read those two files from it.
 
 name: Release
 
 on:
   push:
     tags:
-      - '*'
-  release:
-    types: [published]
+      - '[0-9]+.[0-9]+.[0-9]+'
 
 permissions:
   contents: write
 
-# A release made on GitHub fires both events; let them run one at a time
+# One run per tag at a time, if a tag is re-pushed
 concurrency:
   group: release-${{ github.ref_name }}
 

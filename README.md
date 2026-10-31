@@ -83,7 +83,7 @@ Tests are in `test/links.test.js`. Run them with `npx vitest run`. They decode e
 These steps are for the maintainer.
 
 1. Run `npm version 1.0.1` (or the next version). It updates `manifest.json` and `versions.json`, commits, and creates a tag without a `v`.
-2. Push the commit and the tag: `git push --follow-tags`. If you can't push tags, push the commit, then on GitHub use **Releases > Draft a new release**, type the version as a new tag on `main`, and **Publish release**.
+2. Push the commit and the tag together: `git push --atomic origin main 1.0.1` (with the new version). If you can't push tags, push the commit, then on GitHub use **Releases > Draft a new release**, type the version as a new tag on `main`, and **Publish release**.
 3. `.github/workflows/release.yml` builds the plugin and attaches `main.js` and `manifest.json` to that release. It fails if the tag and `manifest.json` disagree. Check the release page once the workflow is done.
 
 Obsidian offers the update once `manifest.json` on `main` has the new version and the release with that version has its files attached.
