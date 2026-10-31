@@ -1,4 +1,4 @@
-// Copied from the LinkOpen site (utils/codec.js in the inlife/spx repository).
+// Copied from the LinkOpen site (utils/codec.js in the inlife/linkopen repository).
 // Keep everything below this comment identical to that file. The site decodes
 // the links this plugin makes, so the DICTIONARY must stay exactly the same:
 // never edit or remove an existing mapping. To update, copy the site's file again.

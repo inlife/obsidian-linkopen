@@ -81,7 +81,7 @@ To try a build, copy `main.js` and `manifest.json` into `<vault>/.obsidian/plugi
 - `src/main.js`: commands, menus and copying
 - `src/settings.js`: settings and the settings tab
 - `src/links.js`: building the links, with no Obsidian imports
-- `src/codec.js`: a copy of `utils/codec.js` from the [LinkOpen site](https://github.com/inlife/spx). Keep it identical to that file. Its dictionary must never change, because existing links depend on it.
+- `src/codec.js`: a copy of `utils/codec.js` from the [LinkOpen site](https://github.com/inlife/linkopen). Keep it identical to that file. Its dictionary must never change, because existing links depend on it.
 
 Tests are in `test/links.test.js`. In the LinkOpen site repository they run with the site's `npm test` and decode every link with the site's own codec. On their own, run `npx vitest run`; the test then uses `src/codec.js` in place of the site's file.
 
