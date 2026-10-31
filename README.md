@@ -92,14 +92,10 @@ These steps are for the maintainer.
 1. Create the public repository `github.com/inlife/obsidian-linkopen`.
 2. Copy everything in this folder to the root of that repository, including `.gitignore` and `.npmrc`.
 3. Push to the default branch. `main.js` stays out of git; the release workflow builds it.
-4. Tag the release with the exact manifest version, without a leading `v`:
-
-   ```bash
-   git tag 1.0.0
-   git push origin 1.0.0
-   ```
-
-5. `.github/workflows/release.yml` builds the plugin and publishes a GitHub release for the tag with `main.js` and `manifest.json` attached. It fails if the tag and `manifest.json` disagree. Check the release page once it's done.
+4. Make release `1.0.0`, either way:
+   - push a tag with the exact manifest version, no leading `v`: `git tag 1.0.0 && git push origin 1.0.0`
+   - or on GitHub: **Releases > Draft a new release**, type `1.0.0` as a new tag on `main`, and **Publish release**.
+5. `.github/workflows/release.yml` builds the plugin and attaches `main.js` and `manifest.json` to that release. It fails if the tag and `manifest.json` disagree. Check the release page once the workflow is done.
 6. Install it with BRAT (`inlife/obsidian-linkopen`) in a test vault and try the commands on desktop and mobile.
 7. Submit the plugin. Obsidian's current guide ([Submit your plugin](https://docs.obsidian.md/Plugins/Releasing/Submit+your+plugin)) uses the Community directory: sign in at [community.obsidian.md](https://community.obsidian.md) with an Obsidian account, link your GitHub account, open **Plugins**, select **New plugin**, enter `https://github.com/inlife/obsidian-linkopen`, choose the owner, agree to the developer policies and select **Submit**. The directory reads `manifest.json` from the default branch, and the automated review shows anything that needs fixing.
 
